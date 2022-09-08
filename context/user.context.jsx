@@ -7,6 +7,8 @@ export const UserContext = createContext({
     setCurrentUser: () => null,
 });
 
+
+
 // the provider is the actual component
 // this will wrapp App and allow any component to call this children which
 // will be the user captured on sign up or sign it

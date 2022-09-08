@@ -2,11 +2,7 @@ import Home from "./components/routes/home/home.component";
 import Navigation from './components/routes/navigation/navigation.component'
 import { Routes, Route } from "react-router-dom";
 import SignIn from "./components/routes/sign-in/sign-in.component";
-
-
-const Shop = () => {
-  return <h1>Welcome to the Shop</h1>;
-};
+import Shop from "./components/routes/shop/shop.component";
 
 // We are wrapping the application with Routes
 // Indside Routes we have Route that takes the path and element

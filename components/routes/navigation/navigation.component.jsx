@@ -1,8 +1,12 @@
 import { Outlet, Link } from "react-router-dom";
+import { useState } from "react";
 import { Fragment, useContext } from "react";
 import { ReactComponent as CrwnLogo } from "../../../assets/crown.svg";
 import { UserContext } from "../../../context/user.context";
+import { CartContext } from "../../../context/cart.context";
 import { signOutUser } from "../../../utils/firebase/firebase.utils";
+import CartIcon from "../../cart-icon/cart-icon.component";
+import CartDropdown from "../../cart-dropdown/cart-dropdown.component";
 import "./navigation.styles.scss";
 /*
  * Outlet will mean than anything nested inside the Route of NAvigation will be below
@@ -15,6 +19,8 @@ import "./navigation.styles.scss";
  */
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
+  const { isCartOpen } = useContext(CartContext);
+
   console.log("From the Navigation: ", currentUser);
 
   return (
@@ -26,13 +32,13 @@ const Navigation = () => {
         </Link>
 
         <div className="nav-links-container">
-          {/* SHOP Button */}
+          {/* ####################### SHOP Button #######################*/}
           <Link className="nav-link" to="/shop">
             SHOP
           </Link>
 
-          {/* SIGN IN/OUT Button
-           * if the currentUser is populated set to SIGN OUT otherwise set to SIGN IN
+          {/* ####################### Sign in/out Button #######################*/}
+          {/* if the currentUser is populated set to SIGN OUT otherwise set to SIGN IN
            */}
           {currentUser ? (
             <span className="nav-link" onClick={signOutUser}>
@@ -43,7 +49,13 @@ const Navigation = () => {
               SIGN IN
             </Link>
           )}
+
+          {/* ####################### Cart Icon Button #######################*/}
+          <CartIcon/>
         </div>
+
+        {isCartOpen && <CartDropdown/>}
+
       </div>
       <Outlet />
     </Fragment>
