@@ -1,12 +1,10 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import "./sign-in-form.styles.scss";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
-import { UserContext } from "../../context/user.context";
 
 import {
   logInWithEmailAndPassword,
-  createUserDocumentFromAuth,
   signInWithGooglePopup,
 } from "../../utils/firebase/firebase.utils";
 
@@ -18,10 +16,6 @@ const defaultFormFields = {
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
-
-  // Calling the UserContect that is wrapping App in index.js
-  // which allows storing global data {users} to be fetched from anywhere
-  const { setCurrentUser } = useContext(UserContext);
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -36,13 +30,10 @@ const SignInForm = () => {
     event.preventDefault();
 
     try {
-      const {user} = await logInWithEmailAndPassword(email, password);
+      const { user } = await logInWithEmailAndPassword(email, password);
       console.log(user);
 
-      // Setting the context user so that it is accessible anywhere from any componenet
-      setCurrentUser(user);
-
-      console.log('User logged in successfully');
+      console.log("User logged in successfully");
 
       resetFormFields();
     } catch (error) {
@@ -54,9 +45,8 @@ const SignInForm = () => {
     // from the response of signInWithGoogle() I am destructuring the response to get object user only
     // user I am then passing it to the function createUserDocumentFromAuth = async (userAuth)
     // that will tell me if the user exists or not using the userSnapshot.exists()
-    const { user } = await signInWithGooglePopup();
-    console.log(user);
-    const userDocRef = await createUserDocumentFromAuth(user);
+    await signInWithGooglePopup();
+    
   };
 
   return (

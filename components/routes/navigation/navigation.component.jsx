@@ -14,13 +14,8 @@ import "./navigation.styles.scss";
  * it's usefull if you dont want to render a specific HTML element
  */
 const Navigation = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
   console.log("From the Navigation: ", currentUser);
-
-  const signOutHandler = async () => {
-    const respone = await signOutUser();
-    setCurrentUser(null);
-  };
 
   return (
     <Fragment>
@@ -40,7 +35,7 @@ const Navigation = () => {
            * if the currentUser is populated set to SIGN OUT otherwise set to SIGN IN
            */}
           {currentUser ? (
-            <span className="nav-link" onClick={signOutHandler}>
+            <span className="nav-link" onClick={signOutUser}>
               SIGN OUT
             </span>
           ) : (

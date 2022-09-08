@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -6,7 +6,6 @@ import {
 import FormInput from "../form-input/form-input.component";
 import "./sign-up-form.styles.scss";
 import Button from "../button/button.component";
-import { UserContext } from "../../context/user.context";
 const defaultFormFields = {
   displayName: "",
   email: "",
@@ -17,10 +16,6 @@ const defaultFormFields = {
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
-
-  // Calling the UserContect that is wrapping App in index.js
-  // which allows storing global data {users} to be fetched from anywhere
-  const { setCurrentUser } = useContext(UserContext);
 
   console.log(formFields);
 
@@ -43,9 +38,6 @@ const SignUpForm = () => {
       );
 
       await createUserDocumentFromAuth(user, { displayName });
-
-      // Setting the context user so that it is accessible anywhere from any componenet
-      setCurrentUser(user);
 
       console.log(user);
 
