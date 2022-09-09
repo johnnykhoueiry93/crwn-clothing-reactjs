@@ -1,8 +1,9 @@
 import Home from "./components/routes/home/home.component";
-import Navigation from './components/routes/navigation/navigation.component'
+import Navigation from "./components/routes/navigation/navigation.component";
 import { Routes, Route } from "react-router-dom";
 import SignIn from "./components/routes/sign-in/sign-in.component";
 import Shop from "./components/routes/shop/shop.component";
+import Checkout from "./components/routes/checkout/checkout.component";
 
 // We are wrapping the application with Routes
 // Indside Routes we have Route that takes the path and element
@@ -17,9 +18,10 @@ const App = () => {
     <div>
       <Routes>
         <Route path="/" element={<Navigation />}>
-          <Route index element={<Home />} /> 
+          <Route index element={<Home />} />
           <Route path="shop" element={<Shop />} />
           <Route path="sign-in" element={<SignIn />} />
+          <Route path="checkout" element={<Checkout />} />
         </Route>
       </Routes>
     </div>
